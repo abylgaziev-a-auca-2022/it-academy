@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="ISO-8859-1" />
+    <meta name="description" content="A small digital library of books in the public domain." />
+    <title>Simple Library</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{~/images/favicon.ico}" />
+    <link th:href="@{~/styles/main.css}" rel="stylesheet">
+    <script th:src="@{~/scripts/script.js}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-6HT06T94SQ');
+    </script>
+  </head>
+  <body>
+    <header class="outer-content">
+      <h1 id="title">
+        <a th:href="@{~/index}">University Library</a>
+      </h1>
+      <ul>
+        <div sec:authorize="isAnonymous()">
+          <li><a th:href="@{~/signup}">Signup</a></li>
+          <li><a th:href="@{~/login}">Login</a></li>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+          <li><a th:href="@{~/account}">Account</a></li>
+          <li><a th:href="@{~/logout}">Logout</a></li>
+        </div>
+      </ul>
+    </header>
+    <main class="inner-content">
+      <div th:replace="${content}"></div>
+      <div id="listOverlay" class="overlay" th:if="${lists}">
+        <div th:replace="lists/savetolist"></div>
+      </div>
+    </main>
+    <footer class="outer-content">
+      <a th:href="@{~/search}">Search</a>
+      <span>&bull;</span>
+      <a th:href="@{~/about}">About</a>
+      <span>&bull;</span>
+      <a th:href="@{~/help}">Help</a>
+    </footer>
+  </body>
+</html>

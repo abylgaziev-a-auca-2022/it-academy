@@ -1,0 +1,7 @@
+# Ignore all folders except the source
+/*/
+!/src/
+
+# Ignore all uploaded files except the defaults
+/src/main/uploads/*/*
+!/src/main/uploads/*/*default*

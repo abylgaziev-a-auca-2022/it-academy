@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<h2 th:text="${author.name}"></h2>
+<div sec:authorize="isAuthenticated()">
+  <button class="button-style margin-bottom" th:attr="onclick=|openListPopup(${author.id},'authors')|">Save</button>
+</div>
+<h4>Books</h4>
+<table class="full-width-table">
+  <tr th:each="book:${author.books}">
+    <td class="full-width">
+      <a class="button-style" th:href="@{|/books/${book.id}|}" th:text="${book.name}"></a>
+    </td>
+    <td sec:authorize="isAuthenticated()">
+      <button class="button-style" th:attr="onclick=|openListPopup(${book.id},'books')|">Save</button>
+    </td>
+  </tr>
+</table>
